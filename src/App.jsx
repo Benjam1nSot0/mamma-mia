@@ -4,20 +4,22 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import Navbar from "./Navbar";
-import Cart from "./Cart";
-import Home from "./Home";
+//import Cart from "./Cart";
+//import Home from "./Home";
 import Footer from "./Footer";
 //import Register from "./Register"
 //import Login from "./Login"
+import Pizza from "./Pizza"
 
 function App() {
   return(
     <div>
       <Navbar/>
-      <Cart/>
+      {/*<Cart/>*/}
     {/* <Home/> */}
      {/* <Register/> */}
       {/*<Login/> */}
+      <Pizza/>
       <Footer/>
     </div>
   );
