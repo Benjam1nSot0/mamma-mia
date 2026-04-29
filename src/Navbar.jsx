@@ -1,31 +1,43 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const total = 25000;
   const token = false;
+
   return (
-    <div className="d-flex justify-content-between align-items-center p-3 bg-dark text-white">
-      
-      <div>
-        <button className="btn btn-outline-light me-2">🍕 Home</button>
+    <nav className="navbar navbar-dark bg-dark px-3">
+      <div className="d-flex gap-2">
+        <Link to="/" className="btn btn-outline-light">
+          🍕 Home
+        </Link>
+
         {token ? (
-  <>
-    <button className="btn btn-outline-light me-2">🔓 Profile</button>
-    <button className="btn btn-outline-light me-2">🔒 Logout</button>
-  </>
-) : (
-  <>
-    <button className="btn btn-outline-light me-2">🔐 Login</button>
-    <button className="btn btn-outline-light">🔐 Register</button>
-  </>
-)}
+          <>
+            <Link to="/profile" className="btn btn-outline-light">
+              🔓 Profile
+            </Link>
+
+            <Link to="/" className="btn btn-outline-light">
+              🔒 Logout
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="btn btn-outline-light">
+              🔐 Login
+            </Link>
+
+            <Link to="/register" className="btn btn-outline-light">
+              🔐 Register
+            </Link>
+          </>
+        )}
       </div>
 
-      <div>
-        <button className="btn btn-success">
-          🛒 Total: ${total.toLocaleString()}
-        </button>
-      </div>
-
-    </div>
+      <Link to="/cart" className="btn btn-success">
+        🛒 Total: ${total.toLocaleString()}
+      </Link>
+    </nav>
   );
 };
 
