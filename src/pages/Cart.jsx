@@ -1,35 +1,13 @@
-import { useState } from "react";
-import { pizzaCart } from "../pizzas";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart);
-
-  const aumentar = (id) => {
-    setCart(
-      cart.map((pizza) =>
-        pizza.id === id
-          ? { ...pizza, count: pizza.count + 1 }
-          : pizza
-      )
-    );
-  };
-
-  const disminuir = (id) => {
-    setCart(
-      cart
-        .map((pizza) =>
-          pizza.id === id
-            ? { ...pizza, count: pizza.count - 1 }
-            : pizza
-        )
-        .filter((pizza) => pizza.count > 0)
-    );
-  };
-
-  const total = cart.reduce(
-    (acc, pizza) => acc + pizza.price * pizza.count,
-    0
-  );
+  const {
+    cart,
+    increaseQuantity,
+    decreaseQuantity,
+    total,
+  } = useContext(CartContext);
 
   return (
     <div className="container mt-5">
@@ -48,7 +26,7 @@ const Cart = () => {
           <div>
             <button
               className="btn btn-danger btn-sm me-2"
-              onClick={() => disminuir(pizza.id)}
+              onClick={() => decreaseQuantity(pizza.id)}
             >
               -
             </button>
@@ -57,19 +35,25 @@ const Cart = () => {
 
             <button
               className="btn btn-primary btn-sm ms-2"
-              onClick={() => aumentar(pizza.id)}
+              onClick={() => increaseQuantity(pizza.id)}
             >
               +
             </button>
           </div>
 
-          <span>${(pizza.price * pizza.count).toLocaleString()}</span>
+          <span>
+            ${(pizza.price * pizza.count).toLocaleString()}
+          </span>
         </div>
       ))}
 
-      <h4 className="mt-4">Total: ${total.toLocaleString()}</h4>
+      <h4 className="mt-4">
+        Total: ${total.toLocaleString()}
+      </h4>
 
-      <button className="btn btn-success mt-2">Pagar</button>
+      <button className="btn btn-success mt-2">
+        Pagar
+      </button>
     </div>
   );
 };
